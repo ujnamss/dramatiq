@@ -18,8 +18,10 @@ from __future__ import annotations
 
 import re
 import time
-from typing import TYPE_CHECKING, Any, Callable, Dict, Generic, Optional, TypeVar, Union, overload
+from inspect import iscoroutinefunction
+from typing import TYPE_CHECKING, Any, Awaitable, Callable, Dict, Generic, Optional, TypeVar, Union, overload
 
+from .asyncio import async_to_sync
 from .broker import Broker, get_broker
 from .logging import get_logger
 from .message import Message
@@ -51,10 +53,9 @@ class Actor(Generic[P, R]):
       options(dict): Arbitrary options that are passed to the broker
         and middleware.
     """
-
     def __init__(
         self,
-        fn: Callable[P, R],
+        fn: Callable[P, Union[R, Awaitable[R]]],
         *,
         broker: Broker,
         actor_name: str,
@@ -63,7 +64,7 @@ class Actor(Generic[P, R]):
         options: Dict[str, Any],
     ) -> None:
         self.logger = get_logger(fn.__module__, actor_name)
-        self.fn = fn
+        self.fn = async_to_sync(fn) if iscoroutinefunction(fn) else fn
         self.broker = broker
         self.actor_name = actor_name
         self.queue_name = queue_name

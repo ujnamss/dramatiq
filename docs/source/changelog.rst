@@ -8,13 +8,61 @@ All notable changes to this project will be documented in this file.
 `Unreleased`_
 -------------
 
+Added
+^^^^^
+
+* Asyncio support.  (`#536`_, `@caspervdw`_)
+
+.. _#536: https://github.com/Bogdanp/dramatiq/pull/536
+.. _@caspervdw: https://github.com/caspervdw
+
+
+`1.14.2`_ -- 2023-03-25
+-----------------------
+
+Fixed
+^^^^^
+
+* Restored ``namedtuple`` instance methods on ``Message``. (`#538`_)
+
+.. _#538: https://github.com/Bogdanp/dramatiq/pull/538
+
+
+`1.14.1`_ -- 2023-02-25
+-----------------------
+
+Fixed
+^^^^^
+
+* Added missing ``py.typed`` file to distributions. (`#531`_)
+
+.. _#531: https://github.com/Bogdanp/dramatiq/pull/531
+
+
+`1.14.0`_ -- 2023-02-05
+-----------------------
+
 Removed
 ^^^^^^^
 
 * Dropped Python 3.6 support as it reached end-of-life
 
+Changed
+^^^^^^^
+
+* Added Python 3.11 support to CI builds. (`#511`_, `@FinnLidbetter`_)
+* Improved typing support.  ``Message`` is now a dataclass, but it
+  should be compatible with the previous namedtuple-based
+  implementation. (`#512`_, `#513`_, `#515`_, `#516`_, `@orsinium`_)
+
 .. _#465: https://github.com/Bogdanp/dramatiq/issues/465
 .. _#466: https://github.com/Bogdanp/dramatiq/pull/466
+.. _#511: https://github.com/Bogdanp/dramatiq/pull/511
+.. _#512: https://github.com/Bogdanp/dramatiq/pull/512
+.. _#513: https://github.com/Bogdanp/dramatiq/pull/513
+.. _#515: https://github.com/Bogdanp/dramatiq/pull/515
+.. _#516: https://github.com/Bogdanp/dramatiq/pull/516
+.. _@orsinium: https://github.com/orsinium
 
 
 `1.13.0`_ -- 2022-04-02
@@ -71,6 +119,8 @@ Fixed
 * An issue where stopping the process too quickly after boot could
   lead to an ``AttributeError``. (`#463`_, `#464`_, `@FinnLidbetter`_)
 
+.. _#463: https://github.com/Bogdanp/dramatiq/issues/463
+.. _#464: https://github.com/Bogdanp/dramatiq/pull/464
 
 `1.12.1`_ -- 2021-12-19
 -----------------------
@@ -82,6 +132,7 @@ Fixed
 * An issue where Redis message ids could be put back onto the queue
   after ack/nack.  (`#442`_, `#444`_)
 
+.. _#438: https://github.com/Bogdanp/dramatiq/pull/438
 .. _#442: https://github.com/Bogdanp/dramatiq/issues/442
 .. _#444: https://github.com/Bogdanp/dramatiq/pull/444
 
@@ -1075,7 +1126,10 @@ Changed
 * Capped prefetch counts to 65k.
 
 
-.. _Unreleased: https://github.com/Bogdanp/dramatiq/compare/v1.13.0...HEAD
+.. _Unreleased: https://github.com/Bogdanp/dramatiq/compare/v1.14.2...HEAD
+.. _1.14.2: https://github.com/Bogdanp/dramatiq/compare/v1.14.1...v1.14.2
+.. _1.14.1: https://github.com/Bogdanp/dramatiq/compare/v1.14.0...v1.14.1
+.. _1.14.0: https://github.com/Bogdanp/dramatiq/compare/v1.13.0...v1.14.0
 .. _1.13.0: https://github.com/Bogdanp/dramatiq/compare/v1.12.3...v1.13.0
 .. _1.12.3: https://github.com/Bogdanp/dramatiq/compare/v1.12.2...v1.12.3
 .. _1.12.2: https://github.com/Bogdanp/dramatiq/compare/v1.12.1...v1.12.2
